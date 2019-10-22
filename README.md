@@ -16,5 +16,5 @@ I make a funny question for user that the "Bot" can read people'e mind by predic
 
 **Using a phone or other video device, record someone trying out your ChatBot. Upload that video to this repository and link to it here!**
 
----
-Starter code by [David Goedicke](mailto:da.goedicke@gmail.com), closely based on work by [Nikolas Martelaro](mailto:nmartelaro@gmail.com) and [Captain Anonymous](https://codepen.io/anon/pen/PEVYXz), who forked original work by [Ian Tairea](https://codepen.io/mrtairea/pen/yJapwv).
+[normal](https://youtu.be/OxI5lHBPKyc)
+[dummy](https://youtu.be/qICVR6v7iW0)
