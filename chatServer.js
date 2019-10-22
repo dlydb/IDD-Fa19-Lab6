@@ -30,7 +30,7 @@ io.on('connect', function(socket) {
   var questionNum = 0; // keep count of question, used for IF condition.
   socket.on('loaded', function() { // we wait until the client has loaded and contacted us that it is ready to go.
 
-    socket.emit('answer', "Hey, hello I am \"___*-\" a simple chat bot example."); //We start with the introduction;
+    socket.emit('answer', "Hey, hello I am zzzzz a simple chat bot example."); //We start with the introduction;
     setTimeout(timedQuestion, 5000, socket, "What is your name?"); // Wait a moment and respond with a question.
 
   });
@@ -48,6 +48,7 @@ function bot(data, socket, questionNum) {
   var answer;
   var question;
   var waitTime;
+  var mode;
 
   /// These are the main statments that make up the conversation.
   if (questionNum == 0) {
@@ -57,39 +58,67 @@ function bot(data, socket, questionNum) {
   } else if (questionNum == 1) {
     answer = 'Really, ' + input + ' years old? So that means you were born in: ' + (2018 - parseInt(input)); // output response
     waitTime = 5000;
-    question = 'Where do you live?'; // load next question
-  } else if (questionNum == 2) {
-    answer = 'Cool! I have never been to ' + input + '.';
-    waitTime = 5000;
-    question = 'Whats your favorite color?'; // load next question
-  } else if (questionNum == 3) {
-    answer = 'Ok, ' + input + ' it is.';
-    socket.emit('changeBG', input.toLowerCase());
-    waitTime = 5000;
-    question = 'Can you still read the font?'; // load next question
-  } else if (questionNum == 4) {
-    if (input.toLowerCase() === 'yes' || input === 1) {
-      answer = 'Perfect!';
-      waitTime = 5000;
-      question = 'Whats your favorite place?';
-    } else if (input.toLowerCase() === 'no' || input === 0) {
-      socket.emit('changeFont', 'white'); /// we really should look up the inverse of what we said befor.
-      answer = ''
-      question = 'How about now?';
-      waitTime = 0;
-      questionNum--; // Here we go back in the question number this can end up in a loop
-    } else {
-      question = 'Can you still read the font?'; // load next question
-      answer = 'I did not understand you. Could you please answer "yes" or "no"?'
-      questionNum--;
-      waitTime = 5000;
-    }
+    question = 'Do you believe that AI can read your mind?';
     // load next question
-  } else {
-    answer = 'I have nothing more to say!'; // output response
+  } else if (questionNum == 2) {
+    if (input.toLowerCase() == 'yes'){
+      answer = 'You must be a computer! Give back my human!'
+      mode = 1;
+      waitTime = 5000;
+      question = 'Then I will show you, I can also read computer mind :) input a random number and input enter';
+    } else {
+      answer = 'I will show you a magic'
+      mode = 2;
+      waitTime = 5000;
+      question = 'Take a piece of paper and think of a number. Press enter if you are ready';
+    }
+  } else if (questionNum == 3) {
+    answer = 'Add 9 to it'
+    waitTime = 5000;
+    if (mode == 1) {
+      question = 'Then Multiply the result by 3 and input enter. Take your time if you are a 80s PC';
+    } else {
+      question = 'Then Multiply the result by 3 and click enter.'
+    }
+  } else if (questionNum == 4) {
+    answer = 'Subtract 6 and Divide your result by 3';
+    waitTime = 8000;
+    question = 'Do you still remember your original number?';
+  } else if (questionNum == 5) {
+    if (input.toLowerCase() == 'yes'){
+      answer = 'Then subtract your original number';
+      waitTime = 5000;
+      question = 'Are you ready for the magic time?'
+    } else {
+      if (mode == 1){
+        answer = 'Please buy a new memory!'
+        waitTime = 2000;
+        question = 'Input a number and enter when you are ready';
+      } else {
+        answer = 'Write your number somewhere on the paper!';
+        waitTime = 3000;
+        question = 'Have a number in your mind and press enter';
+      }
+      questionNum = 2;
+    }
+  } else if (questionNum == 6) {
+    answer = 'You got 7, right?';
     waitTime = 0;
     question = '';
   }
+/*    answer = 'Now I will show you AI can read your mind';
+    waitTime = 5000;
+    question = 'First grad a piece of paper, when you are ready, type anything you want.';
+  } else if (questionNum == 6) {
+    answer = 'Pick a number between 1 and 25, donot let me know!';
+    waitTime = 5000;
+  } else if (questionNum == 7) {
+    answer = 'Add 9 to it';
+    waitTime = 5000;
+  } else if (questionNum == 8){
+    answer = 'Multiply the result by 3';
+    waitTime = 5000;
+  }*/
 
 
   /// We take the changed data and distribute it across the required objects.
